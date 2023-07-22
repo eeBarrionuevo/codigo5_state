@@ -21,7 +21,9 @@ class InitPage extends StatefulWidget {
 }
 
 class _InitPageState extends State<InitPage> {
-  double sliderValue = 0;
+  double sliderRedValue = 0;
+  double sliderGreenValue = 0;
+  double sliderBlueValue = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -39,17 +41,47 @@ class _InitPageState extends State<InitPage> {
             textAlign: TextAlign.left,
             style: TextStyle(
               fontSize: 14.0,
-              color: Colors.red,
+              color: Color.fromRGBO(sliderRedValue.toInt(),
+                  sliderGreenValue.toInt(), sliderBlueValue.toInt(), 1),
               decoration: TextDecoration.none,
               height: 1.3,
             ),
           ),
           Slider(
-            value: sliderValue,
+            value: sliderRedValue,
             min: 0,
-            max: 300,
+            max: 255,
+            activeColor: Colors.red,
+            inactiveColor: Colors.black12,
+            thumbColor: Colors.red,
             onChanged: (double pepito) {
-              sliderValue = pepito;
+              sliderRedValue = pepito;
+              setState(() {});
+            },
+          ),
+          Slider(
+            value: sliderGreenValue,
+            min: 0,
+            max: 255,
+            activeColor: Colors.greenAccent,
+            inactiveColor: Colors.black12,
+            thumbColor: Colors.greenAccent,
+            onChanged: (double pepito) {
+              sliderGreenValue = pepito;
+              print(pepito);
+              setState(() {});
+            },
+          ),
+          Slider(
+            value: sliderBlueValue,
+            min: 0,
+            max: 255,
+            activeColor: Colors.blueAccent,
+            inactiveColor: Colors.black12,
+            thumbColor: Colors.blueAccent,
+            onChanged: (double pepito) {
+              sliderBlueValue = pepito;
+              print(pepito);
               setState(() {});
             },
           ),
