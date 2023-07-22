@@ -25,6 +25,9 @@ class _InitPageState extends State<InitPage> {
   double sliderGreenValue = 0;
   double sliderBlueValue = 0;
 
+  bool valueCheck = false;
+  bool isUnderline = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,12 +41,14 @@ class _InitPageState extends State<InitPage> {
         children: [
           Text(
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-            textAlign: TextAlign.left,
+            textAlign: valueCheck ? TextAlign.justify : TextAlign.left,
             style: TextStyle(
               fontSize: 14.0,
               color: Color.fromRGBO(sliderRedValue.toInt(),
                   sliderGreenValue.toInt(), sliderBlueValue.toInt(), 1),
-              decoration: TextDecoration.none,
+              decoration: isUnderline == true
+                  ? TextDecoration.underline
+                  : TextDecoration.none,
               height: 1.3,
             ),
           ),
@@ -82,6 +87,24 @@ class _InitPageState extends State<InitPage> {
             onChanged: (double pepito) {
               sliderBlueValue = pepito;
               print(pepito);
+              setState(() {});
+            },
+          ),
+          CheckboxListTile(
+            value: valueCheck,
+            title: Text("Justify"),
+            subtitle: Text("Align"),
+            onChanged: (bool? mandarina) {
+              valueCheck = mandarina!;
+              setState(() {});
+            },
+          ),
+          CheckboxListTile(
+            value: isUnderline,
+            title: Text("Underline"),
+            subtitle: Text("Decoration"),
+            onChanged: (bool? mandarina) {
+              isUnderline = mandarina!;
               setState(() {});
             },
           ),
